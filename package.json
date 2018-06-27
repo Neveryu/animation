@@ -1,0 +1,28 @@
+{
+  "name": "yu-animation",
+  "version": "1.0.0",
+  "description": "a common animation lib",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Neveryu/animation.git"
+  },
+  "keywords": [
+    "common",
+    "frame",
+    "animation",
+    "h5"
+  ],
+  "author": "yu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Neveryu/animation/issues"
+  },
+  "homepage": "https://github.com/Neveryu/animation#readme",
+  "dependencies": {
+    "webpack": "^4.12.2"
+  }
+}
