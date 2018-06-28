@@ -4,7 +4,8 @@
   "description": "a common animation lib",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --progress --color"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,11 @@
     "url": "https://github.com/Neveryu/animation/issues"
   },
   "homepage": "https://github.com/Neveryu/animation#readme",
+  "devDependencies": {
+    "clean-webpack-plugin": "^0.1.19"
+  },
   "dependencies": {
-    "webpack": "^4.12.2"
+    "webpack": "^4.12.2",
+    "webpack-cli": "^3.0.8"
   }
 }

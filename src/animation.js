@@ -1,7 +1,7 @@
 'use strict';
 
+var Timeline = require('./timeline');
 var loadImage = require('./imageloader');
-var Timeline = require('./timeline')
 
 // 初始化状态
 var STATE_INITIAL = 0
@@ -73,15 +73,15 @@ Animation.prototype.changePosition = function(ele, positions, imageUrl) {
         ele.style.backgroundImage = 'url(' + imageUrl + ')';
       }
       // 获得当前背景图片位置索引
-      var index = Math.min(time / _this.interval | 0, len - 1);
-      var position = positions[index].split(' ');
+      var index = Math.min(time / _this.interval | 0, len);
+      var position = positions[index - 1].split(' ');
       // 改变dom对象的背景图片位置
       ele.style.backgroundPosition = position[0] + 'px ' + position[1] + 'px';
-      if(index === len - 1) {
+      if(index === len) {
         next();
       }
     };
-    type = TASK_ASYNC
+    type = TASK_ASYNC;
   } else {
     taskFn = next;
     type = TASK_SYNC;
@@ -103,13 +103,13 @@ Animation.prototype.changeSrc = function(ele, imglist) {
     var _this = this;
     taskFn = function(next, time) {
       // 获得当前图片索引
-      var index = Math.min(time / _this.interval | 0, len - 1)
+      var index = Math.min(time / _this.interval | 0, len)
       // 改变image对象的图片地址
-      ele.src = imglist[index];
-      if(index === len - 1) {
+      ele.src = imglist[index - 1];
+      if(index === len) {
         next();
       }
-    }
+    };
     type = TASK_ASYNC;
   } else {
     taskFn = next;
@@ -135,12 +135,12 @@ Animation.prototype.enterFrame = function(taskFn) {
  */
 Animation.prototype.then = function(callback) {
   var taskFn = function(next) {
-    callback();
+    callback(this);
     next();
   }
   var type = TASK_SYNC;
   return this._add(taskFn, type);
-}
+};
 
 /**
  * 开始执行任务
@@ -155,7 +155,7 @@ Animation.prototype.start = function(interval) {
   if(!this.taskQueue.length) {
     return this;
   }
-  this.state = STATE_STOP;
+  this.state = STATE_START;
   this.interval = interval;
   this._runTask();
   return this;
@@ -334,7 +334,7 @@ Animation.prototype._asyncTask = function(task) {
     taskFn(next, time);
   };
   this.timeline.onenterframe = enterFrame;
-  this.timeline.start(this.interval)
+  this.timeline.start(this.interval);
 };
 
 /**
@@ -352,4 +352,4 @@ Animation.prototype._next = function(task) {
 
 module.exports = function() {
   return new Animation();
-};
+}

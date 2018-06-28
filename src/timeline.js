@@ -22,11 +22,11 @@ var requestAnimationFrame = (function(){
 
 var cancelAnimationFrame = (function() {
   return window.cancelAnimationFrame ||
-          window.webkitCancelRequestAnimationFrame ||
-          window.mozCancelRequestAnimationFrame ||
-          window.oCancelRequestAnimationFrame ||
+          window.webkitCancelAnimationFrame ||
+          window.mozCancelAnimationFrame ||
+          window.oCancelAnimationFrame ||
           function(id) {
-            return window.clearTimeout(id);
+            window.clearTimeout(id);
           };
 })();
 
@@ -43,7 +43,7 @@ function Timeline() {
  * @param {[type]} time 从动画开始到当前执行的时间
  * @return {[type]} [description]
  */
-Timeline.ptototype.onenterframe = function(time) {};
+Timeline.prototype.onenterframe = function(time) {};
 
 /**
  * 动画开始
@@ -57,7 +57,7 @@ Timeline.prototype.start = function(interval) {
     return;
   }
   this.state = STATE_START;
-  this.interval = interval || DEFAULT_INTERVAL
+  this.interval = interval || DEFAULT_INTERVAL;
   startTimeline(this, +new Date());
 }
 
@@ -102,12 +102,12 @@ Timeline.prototype.restart = function() {
  * @return {[type]}           [description]
  */
 function startTimeline(timeline, startTime) {
+  // 记录上一次回调的时间戳
+  var lastTick = +new Date();
 
   timeline.startTime = startTime;
   nextTick.interval = timeline.interval;
 
-  // 记录上一次回调的时间戳
-  var lastTick = +new Date();
   nextTick();
 
   /**

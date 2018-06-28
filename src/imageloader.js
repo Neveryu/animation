@@ -1,5 +1,16 @@
 'use strict';
 
+var __id = 0;
+
+/**
+ * 动态创建id
+ * @return {[type]} [description]
+ */
+function getId() {
+  return ++__id;
+}
+
+
 /**
  * 预加载图片函数
  * @param  {[type]}   images   加载图片的数组或者对象
@@ -20,7 +31,7 @@ function loadImage(images, callback, timeout) {
   // 对图片数组（或对象）进行遍历
   for(var key in images) {
     // 过滤prototype上的属性【hasOwnPrototype无法检查该对象的原型链中是否具有该属性】
-    if(!images.hasOwnPrototype(key)) {
+    if(!images.hasOwnProperty(key)) {
       continue;
     }
     // 获得每个图片元素
@@ -99,8 +110,8 @@ function loadImage(images, callback, timeout) {
       // 每张图片加载完成，计数器减1，当所有图片加载完成且没有超时的情况
       // 清楚超时计时器，且执行回调函数
       if(!--count && !isTimeout) {
-        clearTimeout(timeoutId)
-        callback(success)
+        clearTimeout(timeoutId);
+        callback(success);
       }
     }
   }
@@ -114,11 +125,5 @@ function loadImage(images, callback, timeout) {
     callback(false);
   }
 }
-
-var __id = 0;
-function getId() {
-  return ++__id;
-}
-
 
 module.exports = loadImage;
