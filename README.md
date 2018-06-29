@@ -1,13 +1,12 @@
 # animation
 
-通常我们会遇到一些需求，用js实现一组动画（这里指的是由一帧帧图片组合而成的动画，非jq的animate）。
+通常我们会遇到一些需求，用 javascript 实现一组动画（这里指的是由一帧帧图片组合而成的动画，非 jquery 的animate）。
 
-其实原理很简单，如果是多张图，就定时去改变image的src，如果是一张图，就定时改变backgroud-position；同时，我们还要支持图片预加载，动画执行次数（一次，n次，无限次），动画暂停，动画执行完成的回调等等。
+其实原理很简单，如果是多张图，就定时去改变 image 的 src，如果是一张图，就定时改变 backgroud-position；同时，我们还要支持图片预加载，动画执行次数（一次，n次，无限次），动画暂停，动画执行完成的回调等等。
 
-有了上述需求，我觉得写一个通用的animation库还是很有必要的，这样用户就每必要为每一组动画写逻辑了，从繁琐的劳动中解放，不正是每个coder所期望的么：）
+有了上述需求，我觉得写一个通用的 animation 库还是很有必要的，这样用户就每必要为每一组动画写逻辑了，从繁琐的劳动中解放，不正是每个 coder 所期望的么：）
 
 ## Usage
-
 
 ### 示例
 
@@ -30,16 +29,17 @@
 #### JavaScript
 
 ``` javascript
-var animation = require("frame-animation");
+<script src="../build/animation.js"></script>
+
+var animation = window.animation;
 
 var ele = document.getElementById('demo');
 var frameMap = ['0 0', '0 -100', '0 -200'];
     
-var demoAnimation = animation().changePosition(ele, positions).repeat();
-    demoAnimation.start(200);
+var demoAnimation = animation().changePosition(ele, frameMap).repeat();
+demoAnimation.start(200);
 
 ```
-这种链式调用的语法，是不是很爽呢（妈妈再也不用担心我的动画）
 
 ## animation提供的接口
 
@@ -74,6 +74,10 @@ npm install
 ```bash
 npm run build
 ```
+
+## 项目笔记
+This project's note is [note](note)
+
 
 ## License
 
