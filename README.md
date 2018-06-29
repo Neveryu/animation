@@ -76,7 +76,7 @@ npm run build
 ```
 
 ## 项目笔记
-This project's note is [note](note)
+This project's note is [note](note.md)
 
 
 ## License
